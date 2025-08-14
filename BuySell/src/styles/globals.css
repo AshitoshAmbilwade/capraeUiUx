@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+/* Theme tokens: inviting + approachable */
+:root{
+  --bg: 246 246 248;       /* soft gray */
+  --card: 255 255 255;     /* white */
+  --brand: 101 116 255;    /* periwinkle */
+  --brand-2: 52 211 153;   /* mint */
+  --ink: 22 28 45;         /* dark text */
+  --muted: 100 116 139;    /* slate */
+}
+html, body, #root { height: 100%; }
+body { background: rgb(var(--bg)); color: rgb(var(--ink)); }
+
+.bg-surface { background: rgb(var(--bg)); }
+.card { background: rgb(var(--card)); }
+.btn-brand {
+  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium shadow-sm transition;
+  background: rgb(var(--brand)); color:white;
+}
+.btn-subtle {
+  @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-medium shadow-sm transition border;
+  background: white;
+}
+.input {
+  @apply w-full rounded-xl border px-3 py-2 bg-white outline-none focus:ring-2 focus:ring-indigo-300;
+}
+.label {
+  @apply text-sm text-slate-600 font-medium;
+}
+.section-title {
+  @apply text-xl md:text-2xl font-semibold tracking-tight;
+}
