@@ -4,14 +4,18 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const SellerCard = ({ seller }) => {
-  const { matches, addMatch, rejectMatch, activeBuyerId } = useContext(DataContext);
+  const { addMatch, rejectMatch } = useContext(DataContext);
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  const isMatched = matches.some((m) => m.sellerId === seller.id && m.buyerId === activeBuyerId);
-
   const handleViewProfile = () => {
     navigate(`/profile/seller/${seller.id}`);
+  };
+
+  const handleConnect = () => {
+    // Always create a new match and navigate
+    const matchId = addMatch(seller.id, "buyer");
+    if (matchId) navigate(`/deal-room/${matchId}`);
   };
 
   return (
@@ -24,40 +28,20 @@ const SellerCard = ({ seller }) => {
       </div>
 
       <div className="flex gap-2">
-        {!isMatched ? (
-          <>
-            {user.role === "buyer" && (
-              <button
-                onClick={() => {
-                  const matchId = addMatch(seller.id, "buyer");
-                  if (matchId) navigate(`/deal-room/${matchId}`);
-                }}
-                className="bg-indigo-600 text-white px-3 py-1 rounded-md hover:bg-indigo-700 cursor-pointer"
-              >
-                Connect
-              </button>
-            )}
-            <button
-              onClick={() => rejectMatch(seller.id, "buyer")}
-              className="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 cursor-pointer"
-            >
-              Reject
-            </button>
-          </>
-        ) : (
+        {user.role === "buyer" && (
           <button
-            onClick={() => {
-              const match = matches.find(
-                (m) => m.sellerId === seller.id && m.buyerId === activeBuyerId
-              );
-              if (match) navigate(`/deal-room/${match.matchId}`);
-              else alert("No active deal found");
-            }}
-            className="bg-emerald-600 text-white px-3 py-1 rounded-md hover:bg-emerald-700 cursor-pointer"
+            onClick={handleConnect}
+            className="bg-indigo-600 text-white px-3 py-1 rounded-md hover:bg-indigo-700 cursor-pointer"
           >
-            Connect to chat
+            Connect
           </button>
         )}
+        <button
+          onClick={() => rejectMatch(seller.id, "buyer")}
+          className="bg-gray-200 text-gray-700 px-3 py-1 rounded-md hover:bg-gray-300 cursor-pointer"
+        >
+          Reject
+        </button>
       </div>
     </div>
   );
