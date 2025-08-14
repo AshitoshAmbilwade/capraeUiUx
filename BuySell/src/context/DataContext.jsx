@@ -60,7 +60,7 @@ export const DataProvider = ({ children }) => {
     if (type === "buyer") {
       if (!activeSellerId) return toast.error("No active seller. Complete onboarding.");
       const exists = matches.find((m) => m.buyerId === id && m.sellerId === activeSellerId);
-      if (exists) return toast.error("Match already exists.");
+      
       const match = {
         matchId: crypto.randomUUID(),
         buyerId: id,
@@ -78,7 +78,7 @@ export const DataProvider = ({ children }) => {
     } else if (type === "seller") {
       if (!activeBuyerId) return toast.error("No active buyer. Complete onboarding.");
       const exists = matches.find((m) => m.sellerId === id && m.buyerId === activeBuyerId);
-      if (exists) return toast.error("Match already exists.");
+      
       const match = {
         matchId: crypto.randomUUID(),
         buyerId: activeBuyerId,

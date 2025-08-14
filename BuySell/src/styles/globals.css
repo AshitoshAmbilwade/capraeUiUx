@@ -2,7 +2,7 @@
 
 /* Theme tokens: inviting + approachable */
 :root{
-  --bg: 246 246 248;       /* soft gray */
+  --bg: 30 30 30;       /* soft gray */
   --card: 255 255 255;     /* white */
   --brand: 101 116 255;    /* periwinkle */
   --brand-2: 52 211 153;   /* mint */
@@ -30,4 +30,41 @@ body { background: rgb(var(--bg)); color: rgb(var(--ink)); }
 }
 .section-title {
   @apply text-xl md:text-2xl font-semibold tracking-tight;
+}
+
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.btn-brand {
+  background: linear-gradient(45deg, #6366f1, #8b5cf6);
+  color: white;
+}
+
+.btn-brand:hover {
+  background: linear-gradient(45deg, #8b5cf6, #6366f1);
+}
+
+.btn-subtle {
+  background: white;
+  color: #6366f1;
+}
+
+.btn-subtle:hover {
+  background: #f5f3ff;
 }
